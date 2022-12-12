@@ -12,7 +12,7 @@ class MainView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Main VIew'),
       ),
-      body: Consumer(builder: (context, ref, chile) {
+      body: Consumer(builder: (_, ref, chile) {
         return TextButton(
           onPressed: () async {
             await ref.read(authStateProvider.notifier).logOut();
