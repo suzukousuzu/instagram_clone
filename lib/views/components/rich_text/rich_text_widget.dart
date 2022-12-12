@@ -18,23 +18,24 @@ class RichTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-          children: texts.map((baseText) {
-        if (baseText is LinkText) {
-          return TextSpan(
+        children: texts.map((baseText) {
+          if (baseText is LinkText) {
+            return TextSpan(
+                text: baseText.text,
+                //baseTextのstyleが優先される
+                style: styleForAll?.merge(baseText.style),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    baseText.onTapped();
+                  });
+          } else {
+            return TextSpan(
               text: baseText.text,
-              //styleForAllがnullの場合はbaseTextのstyleが適用
               style: styleForAll?.merge(baseText.style),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  baseText.onTapped();
-                });
-        } else {
-          return TextSpan(
-            text: baseText.text,
-            style: styleForAll?.merge(baseText.style),
-          );
-        }
-      }).toList()),
+            );
+          }
+        }).toList(),
+      ),
     );
   }
 }

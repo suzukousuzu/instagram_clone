@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../state/auth/providers/auth_state_provider.dart';
+import 'package:instagram_clone/views/components/animations/data_not_found_animation_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({Key? key}) : super(key: key);
@@ -10,15 +9,16 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main VIew'),
+        title: const Text('Main VIew'),
       ),
       body: Consumer(builder: (_, ref, chile) {
-        return TextButton(
-          onPressed: () async {
-            await ref.read(authStateProvider.notifier).logOut();
-          },
-          child: const Text('logout'),
-        );
+        return const DataNotFoundAnimationView();
+        // return TextButton(
+        //   onPressed: () async {
+        //     await ref.read(authStateProvider.notifier).logOut();
+        //   },
+        //   child: const Text('logout'),
+        // );
       }),
     );
   }
