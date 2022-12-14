@@ -6,6 +6,7 @@ import 'package:instagram_clone/state/posts/typedefs/user_id.dart';
 import '../../constants/firebase_field_name.dart';
 
 //String:StringのMapを作るためのクラス
+//freezedでいける
 @immutable
 class UserInfoPayload extends MapView<String, String> {
   UserInfoPayload({

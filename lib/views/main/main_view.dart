@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:instagram_clone/views/components/dialogs/alert_dialog_model.dart';
 
+import '../../state/auth/providers/auth_state_provider.dart';
+import '../components/dialogs/log_out_dialog.dart';
 import '../constants/strings.dart';
 import '../tabs/users_posts/user_posts_view.dart';
 
@@ -85,13 +88,13 @@ class _MainViewState extends ConsumerState<MainView> {
             ),
             IconButton(
               onPressed: () async {
-                // final shouldLogOut =
-                //     await const LogoutDialog().present(context).then(
-                //           (value) => value ?? false,
-                //         );
-                // if (shouldLogOut) {
-                //   await ref.read(authStateProvider.notifier).logOut();
-                // }
+                final shouldLogOut =
+                    await const LogoutDialog().present(context).then(
+                          (value) => value ?? false,
+                        );
+                if (shouldLogOut) {
+                  await ref.read(authStateProvider.notifier).logOut();
+                }
               },
               icon: const Icon(
                 Icons.logout,

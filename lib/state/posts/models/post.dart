@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:instagram_clone/state/posts/models/post_key.dart';
 
-import '../../image/upload/model/file_type.dart';
+import '../../image_upload/model/file_type.dart';
 import '../../post_setting/models/post_setting.dart';
 
 //freeze使って、toJson、fromJsonで代替可能
