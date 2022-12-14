@@ -13,30 +13,33 @@ class PostsGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(8.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
+    return SizedBox(
+      height: 800,
+      child: GridView.builder(
+        padding: const EdgeInsets.all(4.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+        ),
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          final post = posts.elementAt(index);
+          return PostThumbnailView(
+            post: post,
+            onTapped: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => PostDetailsView(
+              //       post: post,
+              //     ),
+              //   ),
+              // );
+            },
+          );
+        },
       ),
-      itemCount: posts.length,
-      itemBuilder: (context, index) {
-        final post = posts.elementAt(index);
-        return PostThumbnailView(
-          post: post,
-          onTapped: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => PostDetailsView(
-            //       post: post,
-            //     ),
-            //   ),
-            // );
-          },
-        );
-      },
     );
   }
 }

@@ -14,33 +14,31 @@ class UserPostsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = ref.watch(userPostsProvider);
-    return SingleChildScrollView(
-      child: RefreshIndicator(
-        onRefresh: () {
-          ref.refresh(userPostsProvider);
-          return Future.delayed(
-            const Duration(
-              seconds: 1,
-            ),
-          );
-        },
-        child: SingleChildScrollView(
-          child: posts.when(data: (posts) {
-            if (posts.isEmpty) {
-              return const EmptyContentsWithTextAnimationView(
-                text: Strings.youHaveNoPosts,
-              );
-            } else {
-              return PostsGridView(
-                posts: posts,
-              );
-            }
-          }, error: (error, stackTrace) {
-            return const ErrorAnimationView();
-          }, loading: () {
-            return const LoadingAnimationView();
-          }),
-        ),
+    return RefreshIndicator(
+      onRefresh: () {
+        ref.refresh(userPostsProvider);
+        return Future.delayed(
+          const Duration(
+            seconds: 1,
+          ),
+        );
+      },
+      child: SingleChildScrollView(
+        child: posts.when(data: (posts) {
+          if (posts.isEmpty) {
+            return const EmptyContentsWithTextAnimationView(
+              text: Strings.youHaveNoPosts,
+            );
+          } else {
+            return PostsGridView(
+              posts: posts,
+            );
+          }
+        }, error: (error, stackTrace) {
+          return const ErrorAnimationView();
+        }, loading: () {
+          return const LoadingAnimationView();
+        }),
       ),
     );
   }

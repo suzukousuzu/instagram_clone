@@ -4,8 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instagram_clone/views/components/dialogs/alert_dialog_model.dart';
 
 import '../../state/auth/providers/auth_state_provider.dart';
+import '../../state/image_upload/helpers/image_picker_helper.dart';
+import '../../state/image_upload/model/file_type.dart';
+import '../../state/post_setting/providers/post_settings_provider.dart';
 import '../components/dialogs/log_out_dialog.dart';
 import '../constants/strings.dart';
+import '../create_new_post/create_new_post_view.dart';
 import '../tabs/users_posts/user_posts_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -31,56 +35,56 @@ class _MainViewState extends ConsumerState<MainView> {
                 FontAwesomeIcons.film,
               ),
               onPressed: () async {
-                // pick a video first
-                // final videoFile =
-                //     await ImagePickerHelper.pickVideoFromGallery();
-                // if (videoFile == null) {
-                //   return;
-                // }
-                //
-                // // reset the postSettingProvider
-                // ref.refresh(postSettingProvider);
-                //
-                // // go to the screen to create a new post
-                // if (!mounted) {
-                //   return;
-                // }
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (_) => CreateNewPostView(
-                //       fileType: FileType.video,
-                //       fileToPost: videoFile,
-                //     ),
-                //   ),
-                // );
-              },
-            ),
-            IconButton(
-              onPressed: () async {
-                // pick an image first
-                // final imageFile =
-                //     await ImagePickerHelper.pickImageFromGallery();
-                // if (imageFile == null) {
-                //   return;
-                // }
-                //
-                // // reset the postSettingProvider
-                // ref.refresh(postSettingProvider);
+                //pick a video first
+                final videoFile =
+                    await ImagePickerHelper.pickVideoFromGallery();
+                if (videoFile == null) {
+                  return;
+                }
+
+                // reset the postSettingProvider
+                ref.refresh(postSettingProvider);
 
                 // go to the screen to create a new post
                 if (!mounted) {
                   return;
                 }
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (_) => CreateNewPostView(
-                //       fileType: FileType.image,
-                //       fileToPost: imageFile,
-                //     ),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateNewPostView(
+                      fileType: FileType.video,
+                      fileToPost: videoFile,
+                    ),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              onPressed: () async {
+                //pick an image first
+                final imageFile =
+                    await ImagePickerHelper.pickImageFromGallery();
+                if (imageFile == null) {
+                  return;
+                }
+                //
+                // // reset the postSettingProvider
+                ref.refresh(postSettingProvider);
+
+                // go to the screen to create a new post
+                if (!mounted) {
+                  return;
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateNewPostView(
+                      fileType: FileType.image,
+                      fileToPost: imageFile,
+                    ),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.add_photo_alternate_outlined,
